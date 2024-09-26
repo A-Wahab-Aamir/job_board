@@ -14,58 +14,100 @@ require_once("../db.php");
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Job Portal</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../css/AdminLTE.min.css">
-  <link rel="stylesheet" href="../css/_all-skins.min.css">
-  <!-- Custom -->
-  <link rel="stylesheet" href="../css/custom.css">
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+<meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Job board </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-  <!-- Google Font -->
-  <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-</head>
-<body class="hold-transition skin-green sidebar-mini">
+    <!-- CSS here -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/css/flaticon.css">
+    <link rel="stylesheet" href="assets/css/price_rangs.css">
+    <link rel="stylesheet" href="assets/css/slicknav.css">
+    <link rel="stylesheet" href="assets/css/animate.min.css">
+    <link rel="stylesheet" href="assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/themify-icons.css">
+    <link rel="stylesheet" href="assets/css/slick.css">
+    <link rel="stylesheet" href="assets/css/nice-select.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <style>
+    .nav-link {
+        color: #6c757d;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        padding: 10px 15px;
+        border-radius: 5px;
+        transition: all 0.5s ease;
+    }
+
+    .nav-link:hover {
+        background-color: #f8f9fa;
+    }
+
+    .nav-link.active {
+        background-color: #f8f9fa;
+        color: #fb246a;
+    }
+
+    .nav-link i {
+        margin-right: 10px;
+    }
+
+    .card-title a {
+        color: black;
+        transition: all ease 0.2s;
+    }
+
+    .card-title a:hover {
+        color: #fb246a;
+    }
+    </style>
+
+  </head>
+<body >
+
+
+     
+
+    <header class="mb-5 pb-1 pt-1 shadow-sm">
+        <!-- Header Start -->
+        <div class="header-area header-transparrent">
+            <div class="headder-top header-sticky">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-3 col-md-2">
+                            <!-- Logo -->
+                            <div class="logo">
+                                <a href="index.php"><img src="assets/img/logo/logo.png" alt=""></a>
+                            </div>
+                        </div>
+                        <!-- Mobile Menu -->
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header End -->
+    </header>
+
+
+
+
+
 <div class="wrapper">
 
-  <header class="main-header">
-
-    <!-- Logo -->
-    <a href="index.php" class="logo logo-bg">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>J</b>P</span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Job</b> Portal</span>
-    </a>
-
-    <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
-      <!-- Navbar Right Menu -->
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <li>
-            <a href="../jobs.php">Jobs</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </header>
+ 
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper" style="margin-left: 0px;">
@@ -73,24 +115,46 @@ require_once("../db.php");
     <section id="candidates" class="content-header">
       <div class="container">
         <div class="row">
-          <div class="col-md-3">
-            <div class="box box-solid">
-              <div class="box-header with-border">
-                <h3 class="box-title">Welcome <b><?php echo $_SESSION['name']; ?></b></h3>
-              </div>
-              <div class="box-body no-padding">
-                 <ul class="nav nav-pills nav-stacked">
-                  <li><a href="edit-profile.php"><i class="fa fa-user"></i> Edit Profile</a></li>
-                  <li><a href="index.php"><i class="fa fa-address-card-o"></i> My Applications</a></li>
-                  <li><a href="../jobs.php"><i class="fa fa-list-ul"></i> Jobs</a></li>
-                  <!-- <li><a href="mailbox.php"><i class="fa fa-envelope"></i> Mailbox</a></li> -->
-                  <li class="active"><a href="settings.php"><i class="fa fa-gear"></i> Settings</a></li>
-                  <li><a href="../logout.php"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
-                </ul>
-                </ul>
-              </div>
-            </div>
-          </div>
+        <div class="col-md-3">
+                            <div class="box box-solid p-4 shadow-sm rounded">
+                                <div class="box-header with-border pb-2 mb-3">
+                                    <h4><b>Menu</b></h4>
+                                </div>
+                                <div class="box-body no-padding">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item mb-2">
+                                            <a class="nav-link d-flex align-items-center active"
+                                                href="edit-profile.php">
+                                                <i class="fa fa-user mr-2"></i> Edit Profile
+                                            </a>
+                                        </li>
+                                        <li class="nav-item mb-2">
+                                            <a class="nav-link d-flex align-items-center text-muted" href="index.php">
+                                                <i class="fa fa-address-card mr-2"></i> My Applications
+                                            </a>
+                                        </li>
+                                        <li class="nav-item mb-2">
+                                            <a class="nav-link d-flex align-items-center text-muted" href="jobs.php">
+                                                <i class="fa fa-briefcase mr-2"></i> Jobs
+                                            </a>
+                                        </li>
+                                        <li class="nav-item mb-2">
+                                            <a class="nav-link d-flex align-items-center text-muted"
+                                                href="settings.php">
+                                                <i class="fa fa-cog mr-2"></i> Settings
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center text-muted"
+                                                href="../logout.php">
+                                                <i class="fa fa-sign-out-alt mr-2"></i> Logout
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
           <div class="col-md-9 bg-white padding-2">
             <h2><i>Change Password</i></h2>
             <p>Type in new password that you want to use</p>

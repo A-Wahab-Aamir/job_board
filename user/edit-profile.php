@@ -64,7 +64,8 @@ require_once("../db.php");
     }
 
     .card-title a {
-        color: black transition: all ease 0.2s;
+        color: black;
+        transition: all ease 0.2s;
     }
 
     .card-title a:hover {
@@ -86,6 +87,7 @@ require_once("../db.php");
         </div>
     </div>
     <!-- Preloader Start -->
+     
 
     <header class="mb-5 pb-1 pt-1 shadow-sm">
         <!-- Header Start -->
@@ -110,7 +112,11 @@ require_once("../db.php");
         <!-- Header End -->
     </header>
 
+    
+
     <div class="wrapper">
+
+    
 
         <!-- Content Wrapper. Contains page content -->
         <div>

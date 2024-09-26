@@ -13,7 +13,7 @@ require_once("../db.php");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Job board HTML-5 Template </title>
+    <title>Job board (View Jobs) </title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
@@ -106,96 +106,51 @@ require_once("../db.php");
         <!-- Header End -->
     </header>
 
-        <!-- Content Wrapper. Contains page content -->
-            <section id="candidates" class="content-header">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="box box-solid p-4 shadow-sm rounded">
-                                <div class="box-header with-border pb-2 mb-3">
-                                    <h4><b>Menu</b></h4>
-                                </div>
-                                <div class="box-body no-padding">
-                                    <ul class="nav flex-column">
-                                        <li class="nav-item mb-2">
-                                            <a class="nav-link d-flex align-items-center active"
-                                                href="edit-profile.php">
-                                                <i class="fa fa-user mr-2"></i> Edit Profile
-                                            </a>
-                                        </li>
-                                        <li class="nav-item mb-2">
-                                            <a class="nav-link d-flex align-items-center text-muted" href="index.php">
-                                                <i class="fa fa-address-card mr-2"></i> My Applications
-                                            </a>
-                                        </li>
-                                        <li class="nav-item mb-2">
-                                            <a class="nav-link d-flex align-items-center text-muted" href="jobs.php">
-                                                <i class="fa fa-briefcase mr-2"></i> Jobs
-                                            </a>
-                                        </li>
-                                        <li class="nav-item mb-2">
-                                            <a class="nav-link d-flex align-items-center text-muted"
-                                                href="settings.php">
-                                                <i class="fa fa-cog mr-2"></i> Settings
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link d-flex align-items-center text-muted"
-                                                href="../logout.php">
-                                                <i class="fa fa-sign-out-alt mr-2"></i> Logout
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> 
-            </section>
+      
+          
 
     <!-- Job List Area Start -->
-    <div class="job-listing-area pt-120 pb-120">
+    <div class="job-listing-area">
             <div class="container">
             <div class="row">
-                        <div class="col-md-3">
-                            <div class="box box-solid p-4 shadow-sm rounded">
-                                <div class="box-header with-border pb-2 mb-3">
-                                    <h4><b>Menu</b></h4>
-                                </div>
-                                <div class="box-body no-padding">
-                                    <ul class="nav flex-column">
-                                        <li class="nav-item mb-2">
-                                            <a class="nav-link d-flex align-items-center active"
-                                                href="edit-profile.php">
-                                                <i class="fa fa-user mr-2"></i> Edit Profile
-                                            </a>
-                                        </li>
-                                        <li class="nav-item mb-2">
-                                            <a class="nav-link d-flex align-items-center text-muted" href="index.php">
-                                                <i class="fa fa-address-card mr-2"></i> My Applications
-                                            </a>
-                                        </li>
-                                        <li class="nav-item mb-2">
-                                            <a class="nav-link d-flex align-items-center text-muted" href="jobs.php">
-                                                <i class="fa fa-briefcase mr-2"></i> Jobs
-                                            </a>
-                                        </li>
-                                        <li class="nav-item mb-2">
-                                            <a class="nav-link d-flex align-items-center text-muted"
-                                                href="settings.php">
-                                                <i class="fa fa-cog mr-2"></i> Settings
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link d-flex align-items-center text-muted"
-                                                href="../logout.php">
-                                                <i class="fa fa-sign-out-alt mr-2"></i> Logout
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                <!-- horizontal nav bar  -->
+            <div class="col-md-12 m-2">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light p-3 shadow-sm rounded">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Menu</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="edit-profile.php">
+                        <i class="fa fa-user mr-2"></i> Edit Profile
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-muted" href="index.php">
+                        <i class="fa fa-address-card mr-2"></i> My Applications
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-muted" href="jobs.php">
+                        <i class="fa fa-briefcase mr-2"></i> Jobs
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-muted" href="settings.php">
+                        <i class="fa fa-cog mr-2"></i> Settings
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-muted" href="../logout.php">
+                        <i class="fa fa-sign-out-alt mr-2"></i> Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
                     </div>
                 <div class="row">
                     <!-- Left content -->
@@ -350,7 +305,7 @@ require_once("../db.php");
                                         </div>
                                     </div>
                                     <div class="items-link items-link2 f-right">
-                                        <a href="view-job-post.php?id=<?php echo $row['id_jobpost']; ?>">Full
+                                        <a  style="background-color: #fb246a; color:white; border:0px;" href="view-job-post.php?id=<?php echo $row['id_jobpost']; ?>">Full
                                             details</a>
                                     </div>
                                 </div>
