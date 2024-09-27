@@ -73,7 +73,7 @@ require_once("db.php");
                                             <li><a href="index.php">Home</a></li>
                                             <li><a href="jobs.php" style="color: #FB246A;">Find a Job</a></li>
                                             <li><a href="about.php">About</a></li>
-                                            <li><a href="contact.php">Contact</a></li>
+                                            <li><a href="index.php#buildcv">Build Your CV</a></li>
                                         </ul>
                                     </nav>
                                 </div>

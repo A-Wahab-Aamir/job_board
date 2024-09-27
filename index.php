@@ -76,7 +76,7 @@ require_once("db.php");
                                             <li><a href="index.php" style="color: #FB246A;">Home</a></li>
                                             <li><a href="jobs.php">Find a Job</a></li>
                                             <li><a href="about.php">About</a></li>
-                                            <li><a href="contact.php">Contact</a></li>
+                                            <li><a href="#buildcv">Build Your CV</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -305,12 +305,13 @@ require_once("db.php");
         <!-- Featured_job_end -->
 
         <!-- Online CV Area Start -->
-        <div class="online-cv cv-bg section-overly pt-90 pb-120" data-background="assets/img/gallery/cv_bg.jpg">
+        
+        <div  id="buildcv" class="online-cv cv-bg section-overly pt-90 pb-120" data-background="assets/img/gallery/cv_bg.jpg">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-xl-10">
                         <div class="cv-caption text-center">
-                            <p class="pera1">YOU CAN BUILD YOUR CV HERE</p>
+                            <p class="pera1" >YOU CAN BUILD YOUR CV HERE</p>
                             <p class="pera2"> Make a Difference with Your Resume!</p>
                             <a href="c.v/c.v.php" class="border-btn2 border-btn4">Build your cv</a>
                         </div>

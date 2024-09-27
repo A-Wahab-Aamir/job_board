@@ -13,7 +13,7 @@ require_once("db.php");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Job board HTML-5 Template </title>
+    <title>Job board (Contact Us) </title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
@@ -74,78 +74,78 @@ require_once("db.php");
                                 </div>
                                 <!-- Header-btn -->
                                 <div class="header-btn d-none f-right d-lg-block">
-                                    <?php if(empty($_SESSION['id_user']) && empty($_SESSION['id_company'])) { ?>
-                                    <!-- Register Button -->
-                                    <a href="#" class="btn head-btn1" data-toggle="modal"
-                                        data-target="#registerModal">Register</a>
-                                    <!-- Register Modal -->
-                                    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog"
-                                        aria-labelledby="registerModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="registerModalLabel">Register</h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>Choose your registration type:</p>
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <a href="register-candidates.php" class="btn  btn-block">As
-                                                                a Candidate</a>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <a href="register-company.php" class="btn  btn-block">As a
-                                                                Company</a>
+                                    <?php if (empty($_SESSION['id_user']) && empty($_SESSION['id_company'])) { ?>
+                                        <!-- Register Button -->
+                                        <a href="#" class="btn head-btn1" data-toggle="modal"
+                                            data-target="#registerModal">Register</a>
+                                        <!-- Register Modal -->
+                                        <div class="modal fade" id="registerModal" tabindex="-1" role="dialog"
+                                            aria-labelledby="registerModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="registerModalLabel">Register</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Choose your registration type:</p>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <a href="register-candidates.php" class="btn  btn-block">As
+                                                                    a Candidate</a>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <a href="register-company.php" class="btn  btn-block">As a
+                                                                    Company</a>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <!-- Login Button -->
-                                    <a class="btn head-btn2" data-toggle="modal" data-target="#loginModal">Login</a>
-                                    <!-- Login Modal -->
-                                    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
-                                        aria-labelledby="loginModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="registerModalLabel">Login</h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>Choose your login credential:</p>
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <a href="login-candidates.php" class="btn  btn-block">As a
-                                                                Candidate</a>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <a href="login-company.php" class="btn  btn-block">As a
-                                                                Company</a>
+                                        <!-- Login Button -->
+                                        <a class="btn head-btn2" data-toggle="modal" data-target="#loginModal">Login</a>
+                                        <!-- Login Modal -->
+                                        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
+                                            aria-labelledby="loginModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="registerModalLabel">Login</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Choose your login credential:</p>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <a href="login-candidates.php" class="btn  btn-block">As a
+                                                                    Candidate</a>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <a href="login-company.php" class="btn  btn-block">As a
+                                                                    Company</a>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <?php } else { 
-                                        if(isset($_SESSION['id_user'])) { 
-                                            ?>
-                                    <a href="user/index.php" class="btn head-btn1">Dashboard</a>
-                                    <?php
-                                      } else if(isset($_SESSION['id_company'])) { 
+                                        <?php } else {
+                                        if (isset($_SESSION['id_user'])) {
                                         ?>
-                                    <a href="company/index.php" class="btn head-btn1">Dashboard</a>
-                                    <?php } ?>
-                                    <a href="logout.php" class="btn head-btn2">Logout</a>
+                                            <a href="user/index.php" class="btn head-btn1">Dashboard</a>
+                                        <?php
+                                        } else if (isset($_SESSION['id_company'])) {
+                                        ?>
+                                            <a href="company/index.php" class="btn head-btn1">Dashboard</a>
+                                        <?php } ?>
+                                        <a href="logout.php" class="btn head-btn2">Logout</a>
                                     <?php } ?>
                                 </div>
                             </div>
@@ -185,42 +185,34 @@ require_once("db.php");
                     <h2 class="contact-title">Get in Touch</h2>
                 </div>
                 <div class="col-lg-8">
-                    <form class="form-contact contact_form" action="contact_process.php" method="post" id="contactForm"
-                        novalidate="novalidate">
+                    <form class="form-contact contact_form" action="contact_process.php" method="POST" id="contactForm" novalidate="novalidate">
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
-                                    <textarea class="form-control w-100" name="message" id="message" cols="30" rows="9"
-                                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'"
-                                        placeholder=" Enter Message"></textarea>
+                                    <textarea class="form-control w-100" name="message" id="message" cols="30" rows="9" placeholder="Enter Message"></textarea>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <input class="form-control valid" name="name" id="name" type="text"
-                                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'"
-                                        placeholder="Enter your name">
+                                    <input class="form-control valid" name="name" id="name" type="text" placeholder="Enter your name">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <input class="form-control valid" name="email" id="email" type="email"
-                                        onfocus="this.placeholder = ''"
-                                        onblur="this.placeholder = 'Enter email address'" placeholder="Email">
+                                    <input class="form-control valid" name="email" id="email" type="email" placeholder="Enter email address">
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
-                                    <input class="form-control" name="subject" id="subject" type="text"
-                                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Subject'"
-                                        placeholder="Enter Subject">
+                                    <input class="form-control" name="subject" id="subject" type="text" placeholder="Enter Subject">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group mt-3">
-                            <button type="submit" class="button button-contactForm boxed-btn">Send</button>
+                            <input type="submit" value="Send" class="button button-contactForm boxed-btn">
                         </div>
                     </form>
+
                 </div>
                 <div class="col-lg-3 offset-lg-1">
                     <div class="media contact-info">
@@ -268,7 +260,7 @@ require_once("db.php");
                                 <h4>Contact Info</h4>
                                 <ul>
                                     <li>
-                                        <p>Aptech Metro Stargate, 
+                                        <p>Aptech Metro Stargate,
                                             Karachi, Sindh</p>
                                     </li>
                                     <li><a>Phone : +9234 4433888</a></li>
@@ -298,14 +290,14 @@ require_once("db.php");
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
                         <div class="footer-tittle-bottom">
                             <?php
-                      $sql = "SELECT * FROM job_post";
-                      $result = $conn->query($sql);
-                      if($result->num_rows > 0) {
-                        $totalno = $result->num_rows;
-                      } else {
-                        $totalno = 0;
-                      }
-                    ?>
+                            $sql = "SELECT * FROM job_post";
+                            $result = $conn->query($sql);
+                            if ($result->num_rows > 0) {
+                                $totalno = $result->num_rows;
+                            } else {
+                                $totalno = 0;
+                            }
+                            ?>
                             <span><?php echo $totalno; ?></span>
                             <p>Job Offers</p>
                         </div>
@@ -314,14 +306,14 @@ require_once("db.php");
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
                         <div class="footer-tittle-bottom">
                             <?php
-                      $sql = "SELECT * FROM company WHERE active='1'";
-                      $result = $conn->query($sql);
-                      if($result->num_rows > 0) {
-                        $totalno = $result->num_rows;
-                      } else {
-                        $totalno = 0;
-                      }
-                    ?>
+                            $sql = "SELECT * FROM company WHERE active='1'";
+                            $result = $conn->query($sql);
+                            if ($result->num_rows > 0) {
+                                $totalno = $result->num_rows;
+                            } else {
+                                $totalno = 0;
+                            }
+                            ?>
                             <span><?php echo $totalno; ?></span>
                             <p>Registered Companies</p>
                         </div>
@@ -330,14 +322,14 @@ require_once("db.php");
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
                         <div class="footer-tittle-bottom">
                             <?php
-                      $sql = "SELECT * FROM users WHERE resume!=''";
-                      $result = $conn->query($sql);
-                      if($result->num_rows > 0) {
-                        $totalno = $result->num_rows;
-                      } else {
-                        $totalno = 0;
-                      }
-                     ?>
+                            $sql = "SELECT * FROM users WHERE resume!=''";
+                            $result = $conn->query($sql);
+                            if ($result->num_rows > 0) {
+                                $totalno = $result->num_rows;
+                            } else {
+                                $totalno = 0;
+                            }
+                            ?>
                             <span><?php echo $totalno; ?></span>
                             <p>CVs/Resume</p>
                         </div>
@@ -345,15 +337,15 @@ require_once("db.php");
 
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
                         <div class="footer-tittle-bottom">
-                        <?php
-                      $sql = "SELECT * FROM users WHERE active='1'";
-                      $result = $conn->query($sql);
-                      if($result->num_rows > 0) {
-                        $totalno = $result->num_rows;
-                      } else {
-                        $totalno = 0;
-                      }
-                    ?>
+                            <?php
+                            $sql = "SELECT * FROM users WHERE active='1'";
+                            $result = $conn->query($sql);
+                            if ($result->num_rows > 0) {
+                                $totalno = $result->num_rows;
+                            } else {
+                                $totalno = 0;
+                            }
+                            ?>
                             <span><?php echo $totalno; ?></span>
                             <p>Registered Candidates</p>
                         </div>
@@ -371,7 +363,7 @@ require_once("db.php");
                             <div class="footer-copy-right">
                                 <p>
                                     Copyright &copy;<script>
-                                    document.write(new Date().getFullYear());
+                                        document.write(new Date().getFullYear());
                                     </script> All rights reserved
                                 </p>
                             </div>

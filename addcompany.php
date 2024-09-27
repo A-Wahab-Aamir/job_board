@@ -7,14 +7,27 @@ session_start();
 require_once("db.php");
 
 //If user clicked register button
-if(isset($_POST)) {
-
+if(isset($_POST['submit'])) {
+	// name
+	// email
+	// website
+	// companyname
+	// contactno
+	// aboutme
+	// password
+	// cpassword
+	// country
+	// state
+	// city
+	// image
+	// submit
 	//Escape Special Characters In String First
 	$companyname = mysqli_real_escape_string($conn, $_POST['companyname']);
 	$contactno = mysqli_real_escape_string($conn, $_POST['contactno']);
 	$website = mysqli_real_escape_string($conn, $_POST['website']);
 	$email = mysqli_real_escape_string($conn, $_POST['email']);
 	$password = mysqli_real_escape_string($conn, $_POST['password']);
+	$cpassword = mysqli_real_escape_string($conn, $_POST['cpassword']);
 
 	$country = mysqli_real_escape_string($conn, $_POST['country']);
 	$state = mysqli_real_escape_string($conn, $_POST['state']);
@@ -25,6 +38,13 @@ if(isset($_POST)) {
 
 	//Encrypt Password
 	$password = base64_encode(strrev(md5($password)));
+	$cpassword = base64_encode(strrev(md5($cpassword)));
+	// Check if password and confirm password match
+    // if ($password !== $cpassword) {
+    //     $_SESSION['passwordError'] = "Passwords do not match!";
+    //     header("Location: register-company.php");
+    //     exit();
+    // }
 
 	//sql query to check if email already exists or not
 	$sql = "SELECT email FROM company WHERE email='$email'";
@@ -32,6 +52,12 @@ if(isset($_POST)) {
 
 	//if email not found then we can insert new data
 	if($result->num_rows == 0) {
+		if ($password !== $cpassword) {
+			$_SESSION['passwordError'] = "Passwords do not match!";
+
+			header("Location: register-company.php");
+			exit();
+		}
 
 			//This variable is used to catch errors doing upload process. False means there is some error and we need to notify that user.
 		$uploadOk = true;
