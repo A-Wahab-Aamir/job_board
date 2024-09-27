@@ -1,165 +1,236 @@
 <?php
-
-//To Handle Session Variables on This Page
+// To Handle Session Variables on This Page
 session_start();
 
-//If user Not logged in then redirect them back to homepage. 
-//This is required if user tries to manually enter view-job-post.php in URL.
+// Redirect non-logged users
 if(empty($_SESSION['id_company'])) {
   header("Location: ../index.php");
   exit();
 }
 
-//Including Database Connection From db.php file to avoid rewriting in all files  
+// Database connection
 require_once("../db.php");
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Job Portal</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../css/AdminLTE.min.css">
-  <link rel="stylesheet" href="../css/_all-skins.min.css">
-  <!-- Custom -->
-  <link rel="stylesheet" href="../css/custom.css">
-  
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Job Details - Job Board</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
 
-  <!-- Google Font -->
-  <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <!-- CSS here -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/css/price_rangs.css">
+    <link rel="stylesheet" href="assets/css/flaticon.css">
+    <link rel="stylesheet" href="assets/css/slicknav.css">
+    <link rel="stylesheet" href="assets/css/animate.min.css">
+    <link rel="stylesheet" href="assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/themify-icons.css">
+    <link rel="stylesheet" href="assets/css/slick.css">
+    <link rel="stylesheet" href="assets/css/nice-select.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+    .nav-link {
+        color: #6c757d;
+        font-size: 1rem;
+        padding: 10px 15px;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+    }
+
+    .nav-link.active {
+        background-color: #f8f9fa;
+        color: #fb246a;
+    }
+
+    .nav-link:hover {
+        background-color: #f8f9fa;
+    }
+
+    .nav-link i {
+        margin-right: 10px;
+    }
+
+    .info-box {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    #i {
+        background-color: #fb246a;
+        color: white;
+    }
+
+    .info-box-content {
+        margin-left: 15px;
+    }
+    </style>
 </head>
-<body class="hold-transition skin-green sidebar-mini">
-<div class="wrapper">
 
-  <header class="main-header">
+<body>
 
-    <!-- Logo -->
-    <a href="index.php" class="logo logo-bg">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>J</b>P</span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Job</b> Portal</span>
-    </a>
-
-    <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
-      <!-- Navbar Right Menu -->
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-                  
-        </ul>
-      </div>
-    </nav>
-  </header>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" style="margin-left: 0px;">
-
-    <section id="candidates" class="content-header">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-3">
-            <div class="box box-solid">
-              <div class="box-header with-border">
-                <h3 class="box-title">Welcome <b><?php echo $_SESSION['name']; ?></b></h3>
-              </div>
-              <div class="box-body no-padding">
-                <ul class="nav nav-pills nav-stacked">
-                  <li><a href="index.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-                  <li><a href="edit-company.php"><i class="fa fa-tv"></i> My Company</a></li>
-                  <li><a href="create-job-post.php"><i class="fa fa-file-o"></i> Create Job Post</a></li>
-                  <li class="active"><a href="my-job-post.php"><i class="fa fa-file-o"></i> My Job Post</a></li>
-                  <li><a href="job-applications.php"><i class="fa fa-file-o"></i> Job Application</a></li>
-                  <li><a href="mailbox.php"><i class="fa fa-envelope"></i> Mailbox</a></li>
-                  <li><a href="settings.php"><i class="fa fa-gear"></i> Settings</a></li>
-                  <li><a href="resume-database.php"><i class="fa fa-user"></i> Resume Database</a></li>
-                  <li><a href="../logout.php"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
-                </ul>
-              </div>
+    <!-- Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="assets/img/logo/logo.png" alt="Preloader">
+                </div>
             </div>
-          </div>
-          <div class="col-md-9 bg-white padding-2">
-            <div class="row margin-top-20">
-              <div class="col-md-12">
-              <?php
-               $sql = "SELECT * FROM job_post WHERE id_company='$_SESSION[id_company]' AND id_jobpost='$_GET[id]'";
-                $result = $conn->query($sql);
-
-                //If Job Post exists then display details of post
-                if($result->num_rows > 0) {
-                  while($row = $result->fetch_assoc()) 
-                  {
-                ?>
-                <div class="pull-left">
-                  <h2><b><i><?php echo $row['jobtitle']; ?></i></b></h2>
-                </div>
-                <div class="pull-right">
-                  <a href="my-job-post.php" class="btn btn-default btn-lg btn-flat margin-top-20"><i class="fa fa-arrow-circle-left"></i> Back</a>
-                </div>
-                <div class="clearfix"></div>
-                <hr>
-                <div>
-                  <p><span class="margin-right-10"><i class="fa fa-location-arrow text-green"></i> <?php echo $row['experience']; ?> Years Experience</span> <i class="fa fa-calendar text-green"></i> <?php echo date("d-M-Y", strtotime($row['createdat'])); ?></p>              
-                </div>
-                <div>
-                  <?php echo stripcslashes($row['description']); ?>
-                </div>
-                <div>
-                </div>
-                <?php
-                  }
-                }
-                ?>
-              </div>
-            </div>
-            
-          </div>
         </div>
-      </div>
-    </section>
+    </div>
+    <!-- Preloader End -->
+
+    <!-- Header Start -->
+    <header class="shadow-sm p-2">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-3 col-md-2">
+                    <div class="logo">
+                        <a href="index.php"><img src="assets/img/logo/logo.png" alt="Logo"></a>
+                    </div>
+                </div>
+                <div class="col-12 d-lg-none">
+                    <div class="mobile_menu"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Main Content -->
+    <div class="content-wrapper container mt-5">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3">
+                <div class="p-4 shadow-sm rounded">
+                    <h3 class="box-title">Welcome <b><?php echo $_SESSION['name']; ?></b></h3>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2">
+                            <a class="nav-link text-muted" href="index.php">
+                                <i class="fa fa-tachometer-alt"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a class="nav-link text-muted" href="edit-company.php">
+                                <i class="fa fa-user"></i> My Company
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a class="nav-link text-muted" href="create-job-post.php">
+                                <i class="fa fa-briefcase"></i> Create Job Post
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a class="nav-link active d-flex align-items-center" href="my-job-post.php">
+                                <i class="fa fa-file-alt"></i> My Job Posts
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a class="nav-link text-muted" href="job-applications.php">
+                                <i class="fa fa-envelope"></i> Job Applications
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a class="nav-link text-muted" href="settings.php">
+                                <i class="fa fa-cog"></i> Account Settings
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-muted" href="../logout.php">
+                                <i class="fa fa-sign-out-alt"></i> Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Job Details -->
+            <div class="col-md-9 bg-white p-4">
+                <?php
+    // Ensure proper escaping of GET parameters to prevent SQL injection
+    $jobId = intval($_GET['id']);
+    $sql = "SELECT * FROM job_post WHERE id_company='$_SESSION[id_company]' AND id_jobpost='$jobId'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            // Allowable HTML tags
+            $allowed_tags = '<p><b><i><ul><li><br><strong><em>';
+            // Sanitize description while allowing certain tags
+            $description = strip_tags($row['description'], $allowed_tags);
+            
+            // Remove unwanted \r\n, \n, and \r characters
+            $description = preg_replace('/[\r\n]+/', ' ', $description); // Replace newlines with a space
+            $description = preg_replace('/\s+/', ' ', $description); // Replace multiple spaces with a single space
+            
+            // Trim any extra spaces from the start and end
+            $description = trim($description);
+    ?>
+                <h2 class="mb-3"><i class="fas fa-briefcase"></i> <?php echo htmlspecialchars($row['jobtitle']); ?></h2>
+                <p><i class="fas fa-location-arrow"></i> <?php echo htmlspecialchars($row['experience']); ?> Years
+                    Experience</p>
+                <p><i class="fas fa-calendar-alt"></i> Posted on:
+                    <?php echo date("d-M-Y", strtotime($row['createdat'])); ?></p>
+                <hr>
+                <div><?php echo $description; ?></div>
+                <a href="my-job-post.php" class="btn mt-3"><i class="fas fa-arrow-left"></i> Back</a>
+                <?php
+        }
+    } else {
+        echo "<p class='text-danger'>Job not found.</p>";
+    }
+    ?>
+            </div>
 
 
-    
-
-  </div>
-  <!-- /.content-wrapper -->
 
 
 
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
 
-</div>
-<!-- ./wrapper -->
+        </div>
+    </div>
 
-<!-- jQuery 3 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!-- DataTables -->
-<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../js/adminlte.min.js"></script>
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center mt-5">
+            <p>&copy; 2024 Job Portal. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JS here -->
+    <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="./assets/js/popper.min.js"></script>
+    <script src="./assets/js/bootstrap.min.js"></script>
+    <script src="./assets/js/jquery.slicknav.min.js"></script>
+    <script src="./assets/js/owl.carousel.min.js"></script>
+    <script src="./assets/js/slick.min.js"></script>
+    <script src="./assets/js/price_rangs.js"></script>
+    <script src="./assets/js/wow.min.js"></script>
+    <script src="./assets/js/animated.headline.js"></script>
+    <script src="./assets/js/jquery.magnific-popup.js"></script>
+    <script src="./assets/js/jquery.scrollUp.min.js"></script>
+    <script src="./assets/js/jquery.nice-select.min.js"></script>
+    <script src="./assets/js/jquery.sticky.js"></script>
+    <script src="./assets/js/contact.js"></script>
+    <script src="./assets/js/jquery.form.js"></script>
+    <script src="./assets/js/jquery.validate.min.js"></script>
+    <script src="./assets/js/mail-script.js"></script>
+    <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
+    <script src="./assets/js/plugins.js"></script>
+    <script src="./assets/js/main.js"></script>
 
 </body>
+
 </html>

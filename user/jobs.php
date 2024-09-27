@@ -305,7 +305,7 @@ require_once("../db.php");
                                         </div>
                                     </div>
                                     <div class="items-link items-link2 f-right">
-                                        <a  style="background-color: #fb246a; color:white; border:0px;" href="view-job-post.php?id=<?php echo $row['id_jobpost']; ?>">Full
+                                        <a  style="background-color: #fb246a; color:white; border:0px;" href="../view-job-post.php?id=<?php echo $row['id_jobpost']; ?>">Full
                                             details</a>
                                     </div>
                                 </div>

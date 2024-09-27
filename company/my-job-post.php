@@ -1,177 +1,258 @@
 <?php
 
-//To Handle Session Variables on This Page
+// To Handle Session Variables on This Page
 session_start();
 
-//If user Not logged in then redirect them back to homepage. 
-//This is required if user tries to manually enter view-job-post.php in URL.
-if(empty($_SESSION['id_company'])) {
-  header("Location: ../index.php");
-  exit();
+// If user Not logged in then redirect them back to homepage.
+// This is required if user tries to manually enter view-job-post.php in URL.
+if (empty($_SESSION['id_company'])) {
+    header("Location: ../index.php");
+    exit();
 }
 
-//Including Database Connection From db.php file to avoid rewriting in all files  
+// Including Database Connection From db.php file to avoid rewriting in all files  
 require_once("../db.php");
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Job Portal</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../css/AdminLTE.min.css">
-  <link rel="stylesheet" href="../css/_all-skins.min.css">
-  <!-- Custom -->
-  <link rel="stylesheet" href="../css/custom.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Job Portal</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+    <link rel="manifest" href="site.webmanifest">
+      <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+      <!-- CSS here -->
+      <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+      <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+      <link rel="stylesheet" href="assets/css/flaticon.css">
+      <link rel="stylesheet" href="assets/css/price_rangs.css">
+      <link rel="stylesheet" href="assets/css/slicknav.css">
+      <link rel="stylesheet" href="assets/css/animate.min.css">
+      <link rel="stylesheet" href="assets/css/magnific-popup.css">
+      <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+      <link rel="stylesheet" href="assets/css/themify-icons.css">
+      <link rel="stylesheet" href="assets/css/slick.css">
+      <link rel="stylesheet" href="assets/css/nice-select.css">
+      <link rel="stylesheet" href="assets/css/style.css">
+      <link rel="stylesheet" href="css/custom.css">
   
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
 
-  <!-- Google Font -->
-  <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <style>
+        /* Additional styles to match the new theme */
+        h2 {
+            margin-top: 20px;
+            font-size: 1.5rem;
+        }
+        .nav-link {
+            color: #6c757d;
+            font-size: 1rem;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        .nav-link.active {
+            background-color: #f8f9fa;
+            color: #fb246a;
+        }
+        .nav-link:hover {
+            background-color: #f8f9fa;
+        }
+        .nav-link i {
+            margin-right: 10px;
+        }
+        .table thead {
+            background-color: #fb246a;
+            color: white;
+        }
+        .table-hover tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+        .table-responsive {
+            margin-top: 20px;
+        }
+    </style>
 </head>
-<body class="hold-transition skin-green sidebar-mini">
-<div class="wrapper">
 
-  <header class="main-header">
-
-    <!-- Logo -->
-    <a href="index.php" class="logo logo-bg">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>J</b>P</span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Job</b> Portal</span>
-    </a>
-
-    <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
-      <!-- Navbar Right Menu -->
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-                  
-        </ul>
-      </div>
-    </nav>
-  </header>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" style="margin-left: 0px;">
-
-    <section id="candidates" class="content-header">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-3">
-            <div class="box box-solid">
-              <div class="box-header with-border">
-                <h3 class="box-title">Welcome <b><?php echo $_SESSION['name']; ?></b></h3>
-              </div>
-              <div class="box-body no-padding">
-                <ul class="nav nav-pills nav-stacked">
-                  <li><a href="index.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-                  <li><a href="edit-company.php"><i class="fa fa-tv"></i> My Company</a></li>
-                  <li><a href="create-job-post.php"><i class="fa fa-file-o"></i> Create Job Post</a></li>
-                  <li class="active"><a href="my-job-post.php"><i class="fa fa-file-o"></i> My Job Post</a></li>
-                  <li><a href="job-applications.php"><i class="fa fa-file-o"></i> Job Application</a></li>
-                  <!-- <li><a href="mailbox.php"><i class="fa fa-envelope"></i> Mailbox</a></li> -->
-                  <li><a href="settings.php"><i class="fa fa-gear"></i> Settings</a></li>
-                  <li><a href="resume-database.php"><i class="fa fa-user"></i> Resume Database</a></li>
-                  <li><a href="../logout.php"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-9 bg-white padding-2">
-            <h2><i>My Job Posts</i></h2>
-            <p>In this section you can view all job posts created by you.</p>
-            <div class="row margin-top-20">
-              <div class="col-md-12">
-                <div class="box-body table-responsive no-padding">
-                  <table id="example2" class="table table-hover">
-                    <thead>
-                      <th>Job Title</th>
-                      <th>View</th>
-                    </thead>
-                    <tbody>
-                    <?php
-                     $sql = "SELECT * FROM job_post WHERE id_company='$_SESSION[id_company]'";
-                      $result = $conn->query($sql);
-
-                      //If Job Post exists then display details of post
-                      if($result->num_rows > 0) {
-                        while($row = $result->fetch_assoc()) 
-                        {
-                      ?>
-                      <tr>
-                        <td><?php echo $row['jobtitle']; ?></td>
-                        <td><a href="view-job-post.php?id=<?php echo $row['id_jobpost']; ?>"><i class="fa fa-address-card-o"></i></a></td>
-                      </tr>
-                      <?php
-                       }
-                     }
-                     ?>
-                    </tbody>                    
-                  </table>
-                </div>
-              </div>
-            </div>
-            
-          </div>
+<body>
+  <!-- Preloader -->
+  <div id="preloader-active">
+    <div class="preloader d-flex align-items-center justify-content-center">
+      <div class="preloader-inner position-relative">
+        <div class="preloader-circle"></div>
+        <div class="preloader-img">
+          <img src="assets/img/logo/logo.png" alt="Preloader">
         </div>
       </div>
-    </section>
-
-
-    
-
+    </div>
   </div>
-  <!-- /.content-wrapper -->
 
+    <!-- Header Section -->
+    <header class="mb-5 pb-1 pt-1 shadow-sm">
+        <div class="header-area header-transparrent">
+            <div class="headder-top header-sticky">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-3 col-md-2">
+                            <div class="logo">
+                                <a href="index.php"><img src="assets/img/logo/logo.png" alt="Logo"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
+    <!-- Main Content -->
+    <div class="wrapper">
+        <div class="container">
+            <div class="row">
+                <!-- Sidebar Section -->
+                <div class="col-md-3">
+                    <div class="p-4 shadow-sm rounded">
+                        <h3 class="box-title">Welcome <b><?php echo $_SESSION['name']; ?></b></h3>
+                        <ul class="nav flex-column">
+                            <li class="nav-item mb-2">
+                                <a class="nav-link d-flex align-items-center text-muted" href="index.php">
+                                    <i class="fa fa-tachometer-alt"></i> Dashboard
+                                </a>
+                            </li>
+                            <li class="nav-item mb-2">
+                                <a class="nav-link d-flex align-items-center text-muted" href="edit-company.php">
+                                    <i class="fa fa-user"></i> My Company
+                                </a>
+                            </li>
+                            <li class="nav-item mb-2">
+                                <a class="nav-link d-flex align-items-center text-muted" href="create-job-post.php">
+                                    <i class="fa fa-briefcase"></i> Create Job Post
+                                </a>
+                            </li>
+                            <li class="nav-item mb-2">
+                                <a class="nav-link d-flex align-items-center active" href="my-job-post.php">
+                                    <i class="fa fa-file-alt"></i> My Job Posts
+                                </a>
+                            </li>
+                            <li class="nav-item mb-2">
+                                <a class="nav-link d-flex align-items-center text-muted" href="job-applications.php">
+                                    <i class="fa fa-envelope"></i> Job Applications
+                                </a>
+                            </li>
+                            <li class="nav-item mb-2">
+                                <a class="nav-link d-flex align-items-center text-muted" href="settings.php">
+                                    <i class="fa fa-cog"></i> Account Settings
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center text-muted" href="../logout.php">
+                                    <i class="fa fa-sign-out-alt"></i> Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
 
-</div>
-<!-- ./wrapper -->
+                <!-- Job Posts Table Section -->
+                <div class="col-md-9 p-4 shadow-sm">
+                    <h2><b>My Job Posts</b></h2>
+                    <p>In this section, you can view all job posts created by you.</p>
 
-<!-- jQuery 3 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!-- DataTables -->
-<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../js/adminlte.min.js"></script>
+                    <div class="table-responsive">
+                        <table id="example2" class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Job Title</th>
+                                    <th>View</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $sql = "SELECT * FROM job_post WHERE id_company='$_SESSION[id_company]'";
+                                $result = $conn->query($sql);
 
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                ?>
+                                    <tr>
+                                        <td><?php echo $row['jobtitle']; ?></td>
+                                        <td>
+                                            <a href="view-job-post.php?id=<?php echo $row['id_jobpost']; ?>" class="btn rounded btn-sm">
+                                                <i class="fa fa-eye"></i> View
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php
+                                    }
+                                } else {
+                                    echo "<tr><td colspan='2'>No job posts found.</td></tr>";
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<script>
-  $(function () {
-    $('#example2').DataTable({
-      'paging'      : true,
-      'lengthChange': false,
-      'searching'   : false,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : false
-    });
-  });
-</script>
+    <!-- JS Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <!-- JS here -->
+
+    <!-- All JS Custom Plugins Link Here here -->
+    <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
+    <!-- Jquery, Popper, Bootstrap -->
+    <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="./assets/js/popper.min.js"></script>
+    <script src="./assets/js/bootstrap.min.js"></script>
+    <!-- Jquery Mobile Menu -->
+    <script src="./assets/js/jquery.slicknav.min.js"></script>
+
+    <!-- Jquery Slick , Owl-Carousel Plugins -->
+    <script src="./assets/js/owl.carousel.min.js"></script>
+    <script src="./assets/js/slick.min.js"></script>
+    <script src="./assets/js/price_rangs.js"></script>
+
+    <!-- One Page, Animated-HeadLin -->
+    <script src="./assets/js/wow.min.js"></script>
+    <script src="./assets/js/animated.headline.js"></script>
+    <script src="./assets/js/jquery.magnific-popup.js"></script>
+
+    <!-- Scrollup, nice-select, sticky -->
+    <script src="./assets/js/jquery.scrollUp.min.js"></script>
+    <script src="./assets/js/jquery.nice-select.min.js"></script>
+    <script src="./assets/js/jquery.sticky.js"></script>
+
+    <!-- contact js -->
+    <script src="./assets/js/contact.js"></script>
+    <script src="./assets/js/jquery.form.js"></script>
+    <script src="./assets/js/jquery.validate.min.js"></script>
+    <script src="./assets/js/mail-script.js"></script>
+    <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
+
+    <!-- Jquery Plugins, main Jquery -->
+    <script src="./assets/js/plugins.js"></script>
+    <script src="./assets/js/main.js"></script>
+    <!-- jQuery 3 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../js/adminlte.min.js"></script>
+    <script>
+        $(function () {
+            $('#example2').DataTable();
+        });
+    </script>
 </body>
 </html>

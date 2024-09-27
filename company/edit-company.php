@@ -1,9 +1,6 @@
 <?php
-
-//To Handle Session Variables on This Page
 session_start();
 
-//If user Not logged in then redirect them back to homepage. 
 if(empty($_SESSION['id_company'])) {
   header("Location: ../index.php");
   exit();
@@ -11,179 +8,266 @@ if(empty($_SESSION['id_company'])) {
 
 require_once("../db.php");
 ?>
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html class="no-js" lang="zxx">
+
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Job Portal</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../css/AdminLTE.min.css">
-  <link rel="stylesheet" href="../css/_all-skins.min.css">
-  <!-- Custom -->
-  <link rel="stylesheet" href="../css/custom.css">
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Job board </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-  <!-- Google Font -->
-  <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <!-- CSS here -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/css/flaticon.css">
+    <link rel="stylesheet" href="assets/css/price_rangs.css">
+    <link rel="stylesheet" href="assets/css/slicknav.css">
+    <link rel="stylesheet" href="assets/css/animate.min.css">
+    <link rel="stylesheet" href="assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/themify-icons.css">
+    <link rel="stylesheet" href="assets/css/slick.css">
+    <link rel="stylesheet" href="assets/css/nice-select.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <style>
+    .nav-link {
+      color: #6c757d;
+      font-size: 1rem;
+      padding: 10px 15px;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+    .nav-link.active {
+      background-color: #f8f9fa;
+      color: #fb246a;
+    }
+    .nav-link:hover{
+      background-color: #f8f9fa;
+    }
+    .nav-link i {
+      margin-right: 10px;
+    }
+
+    .form-group label {
+        font-weight: bold;
+    }
+    h2{
+      margin-top: 10px;
+      margin-left: 5px; 
+    }
+    </style>
 </head>
-<body class="hold-transition skin-green sidebar-mini">
-<div class="wrapper">
 
-  <header class="main-header">
-
-    <!-- Logo -->
-    <a href="index.php" class="logo logo-bg">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>J</b>P</span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Job</b> Portal</span>
-    </a>
-
-    <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
-      <!-- Navbar Right Menu -->
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-                   
-        </ul>
-      </div>
-    </nav>
-  </header>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" style="margin-left: 0px;">
-
-    <section id="candidates" class="content-header">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-3">
-            <div class="box box-solid">
-              <div class="box-header with-border">
-                <h3 class="box-title">Welcome <b><?php echo $_SESSION['name']; ?></b></h3>
-              </div>
-              <div class="box-body no-padding">
-                <ul class="nav nav-pills nav-stacked">
-                  <li><a href="index.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-                  <li class="active"><a href="edit-company.php"><i class="fa fa-tv"></i> My Company</a></li>
-                  <li><a href="create-job-post.php"><i class="fa fa-file-o"></i> Create Job Post</a></li>
-                  <li><a href="my-job-post.php"><i class="fa fa-file-o"></i> My Job Post</a></li>
-                  <li><a href="job-applications.php"><i class="fa fa-file-o"></i> Job Application</a></li>
-                  <!-- <li><a href="mailbox.php"><i class="fa fa-envelope"></i> Mailbox</a></li> -->
-                  <li><a href="settings.php"><i class="fa fa-gear"></i> Settings</a></li>
-                  <li><a href="resume-database.php"><i class="fa fa-user"></i> Resume Database</a></li>
-                  <li><a href="../logout.php"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-9 bg-white padding-2">
-            <h2><i>My Company</i></h2>
-            <p>In this section you can change your company details</p>
-            <div class="row">
-              <form action="update-company.php" method="post" enctype="multipart/form-data">
-                <?php
-                $sql = "SELECT * FROM company WHERE id_company='$_SESSION[id_company]'";
-                $result = $conn->query($sql);
-
-                if($result->num_rows > 0) {
-                  while($row = $result->fetch_assoc()) {
-                ?>
-                <div class="col-md-6 latest-job ">
-                  <div class="form-group">
-                     <label>Company Name</label>
-                    <input type="text" class="form-control input-lg" name="companyname" value="<?php echo $row['companyname']; ?>" required="">
-                  </div>
-                  <div class="form-group">
-                     <label>Website</label>
-                    <input type="text" class="form-control input-lg" name="website" value="<?php echo $row['website']; ?>" required="">
-                  </div>
-                  <div class="form-group">
-                    <label for="email">Email address</label>
-                    <input type="email" class="form-control input-lg" id="email" placeholder="Email" value="<?php echo $row['email']; ?>" readonly>
-                  </div>
-                  <div class="form-group">
-                    <label>About Me</label>
-                    <textarea class="form-control input-lg" rows="4" name="aboutme"><?php echo $row['aboutme']; ?></textarea>
-                  </div>
-                  <div class="form-group">
-                    <button type="submit" class="btn btn-flat btn-success">Update Company Profile</button>
-                  </div>
+<body>
+    <!-- Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="assets/img/logo/logo.png" alt="">
                 </div>
-                <div class="col-md-6 latest-job ">
-                  <div class="form-group">
-                    <label for="contactno">Contact Number</label>
-                    <input type="text" class="form-control input-lg" id="contactno" name="contactno" placeholder="Contact Number" value="<?php echo $row['contactno']; ?>">
-                  </div>
-                  <div class="form-group">
-                    <label for="city">City</label>
-                    <input type="text" class="form-control input-lg" id="city" name="city" value="<?php echo $row['city']; ?>" placeholder="city">
-                  </div>
-                  <div class="form-group">
-                    <label for="state">State</label>
-                    <input type="text" class="form-control input-lg" id="state" name="state" placeholder="state" value="<?php echo $row['state']; ?>">
-                  </div>
-                  <div class="form-group">
-                    <label>Change Company Logo</label>
-                    <input type="file" name="image" class="btn btn-default">
-                    <?php if($row['logo'] != "") { ?>
-                    <img src="../uploads/logo/<?php echo $row['logo']; ?>" class="img-responsive" style="max-height: 200px; max-width: 200px;">
-                    <?php } ?>
-                  </div>
-                </div>
-                    <?php
-                    }
-                  }
-                ?>  
-              </form>
             </div>
-            <?php if(isset($_SESSION['uploadError'])) { ?>
-            <div class="row">
-              <div class="col-md-12 text-center">
-                <?php echo $_SESSION['uploadError']; ?>
-              </div>
-            </div>
-            <?php unset($_SESSION['uploadError']); } ?>
-            
-          </div>
         </div>
-      </div>
-    </section>
+    </div>
+    <!-- Preloader End -->
 
-    
+    <header class="mb-5 pb-1 pt-1 shadow-sm">
+        <div class="header-area header-transparrent">
+            <div class="headder-top header-sticky">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-3 col-md-2">
+                            <div class="logo">
+                                <a href="index.php"><img src="assets/img/logo/logo.png" alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 
-  </div>
-  <!-- /.content-wrapper -->
+    <div class="wrapper">
+        <div class="content-wrapper">
+            <section id="candidates" class="content-header">
+                <div class="container">
+                    <div class="row">
+                    <div class="col-md-3">
+            <div class="p-4 shadow-sm rounded">
+            <h3 class="box-title">Welcome <b><?php echo $_SESSION['name']; ?></b></h3>
+              <ul class="nav flex-column">
+                <li class="nav-item mb-2">
+                  <a class="nav-link d-flex align-items-center text-muted" href="index.php">
+                    <i class="fa fa-tachometer-alt"></i> Dashboard
+                  </a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a class="nav-link d-flex align-items-center active" href="edit-company.php">
+                    <i class="fa fa-user"></i> My Company
+                  </a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a class="nav-link d-flex align-items-center text-muted" href="create-job-post.php">
+                    <i class="fa fa-briefcase"></i> Create Job Post
+                  </a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a class="nav-link d-flex align-items-center text-muted" href="my-job-post.php">
+                    <i class="fa fa-file-alt"></i> My Job Posts
+                  </a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a class="nav-link d-flex align-items-center text-muted" href="job-applications.php">
+                    <i class="fa fa-envelope"></i> Job Applications
+                  </a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a class="nav-link d-flex align-items-center text-muted" href="settings.php">
+                    <i class="fa fa-cog"></i> Account Settings
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link d-flex align-items-center text-muted" href="../logout.php">
+                    <i class="fa fa-sign-out-alt"></i> Logout
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+                        <div class="col-md-9 bg-white padding-2">
+                            <h2><b>My Company</b></h2>
+                            <p>In this section you can change your company details</p>
+                            <form action="update-company.php" method="post" enctype="multipart/form-data">
+                                <?php
+                                $sql = "SELECT * FROM company WHERE id_company='$_SESSION[id_company]'";
+                                $result = $conn->query($sql);
 
+                                if($result->num_rows > 0) {
+                                    while($row = $result->fetch_assoc()) {
+                                ?>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Company Name</label>
+                                            <input type="text" class="form-control" name="companyname"
+                                                value="<?php echo $row['companyname']; ?>" required="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Website</label>
+                                            <input type="text" class="form-control" name="website"
+                                                value="<?php echo $row['website']; ?>" required="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Email Address</label>
+                                            <input type="email" class="form-control" id="email"
+                                                value="<?php echo $row['email']; ?>" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>About Me</label>
+                                            <textarea class="form-control" rows="4"
+                                                name="aboutme"><?php echo $row['aboutme']; ?></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn">Update Company Profile</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Contact Number</label>
+                                            <input type="text" class="form-control" id="contactno" name="contactno"
+                                                value="<?php echo $row['contactno']; ?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>City</label>
+                                            <input type="text" class="form-control" id="city" name="city"
+                                                value="<?php echo $row['city']; ?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>State</label>
+                                            <input type="text" class="form-control" id="state" name="state"
+                                                value="<?php echo $row['state']; ?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Change Company Logo</label>
+                                            <input type="file" name="image" class="form-control">
+                                            <?php if($row['logo'] != "") { ?>
+                                            <img src="../uploads/logo/<?php echo $row['logo']; ?>"
+                                                class="img-responsive mt-2"
+                                                style="max-height: 200px; max-width: 200px;">
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php
+                                    }
+                                }
+                                ?>
+                            </form>
+                            <?php if(isset($_SESSION['uploadError'])) { ?>
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <?php echo $_SESSION['uploadError']; ?>
+                                </div>
+                            </div>
+                            <?php unset($_SESSION['uploadError']); } ?>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
 
+    <!-- JS here -->
 
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
+    <!-- All JS Custom Plugins Link Here here -->
+    <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
+    <!-- Jquery, Popper, Bootstrap -->
+    <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="./assets/js/popper.min.js"></script>
+    <script src="./assets/js/bootstrap.min.js"></script>
+    <!-- Jquery Mobile Menu -->
+    <script src="./assets/js/jquery.slicknav.min.js"></script>
 
-</div>
-<!-- ./wrapper -->
+    <!-- Jquery Slick , Owl-Carousel Plugins -->
+    <script src="./assets/js/owl.carousel.min.js"></script>
+    <script src="./assets/js/slick.min.js"></script>
+    <script src="./assets/js/price_rangs.js"></script>
 
-<!-- jQuery 3 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../js/adminlte.min.js"></script>
+    <!-- One Page, Animated-HeadLin -->
+    <script src="./assets/js/wow.min.js"></script>
+    <script src="./assets/js/animated.headline.js"></script>
+    <script src="./assets/js/jquery.magnific-popup.js"></script>
+
+    <!-- Scrollup, nice-select, sticky -->
+    <script src="./assets/js/jquery.scrollUp.min.js"></script>
+    <script src="./assets/js/jquery.nice-select.min.js"></script>
+    <script src="./assets/js/jquery.sticky.js"></script>
+
+    <!-- contact js -->
+    <script src="./assets/js/contact.js"></script>
+    <script src="./assets/js/jquery.form.js"></script>
+    <script src="./assets/js/jquery.validate.min.js"></script>
+    <script src="./assets/js/mail-script.js"></script>
+    <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
+
+    <!-- Jquery Plugins, main Jquery -->
+    <script src="./assets/js/plugins.js"></script>
+    <script src="./assets/js/main.js"></script>
+    <!-- jQuery 3 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../js/adminlte.min.js"></script>
 </body>
+
 </html>

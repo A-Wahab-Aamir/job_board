@@ -170,7 +170,7 @@ require_once("../db.php");
                   <div class="form-group">
                     <button type="submit" class="btn btn-flat btn-success">Change Password</button>
                   </div>
-                  <div id="passwordError" class="color-red text-center hide-me">
+                  <div id="passwordError" class="color-red text-center hide-me" style="visibility: hidden;">
                     Password Mismatch!!
                   </div>
                 </form>
@@ -213,7 +213,8 @@ require_once("../db.php");
   $("#changePassword").on("submit", function(e) {
     e.preventDefault();
     if( $('#password').val() != $('#cpassword').val() ) {
-      $('#passwordError').show();
+      // $('#passwordError').show();
+      document.getElementById('passwordError').style.visibility='visible';
     } else {
       $(this).unbind('submit').submit();
     }

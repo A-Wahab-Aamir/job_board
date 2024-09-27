@@ -24,7 +24,7 @@ if(isset($_GET)) {
 
 	//Check if user has applied to job post or not. If not then add his details to apply_job_post table.
 	$sql1 = "SELECT * FROM apply_job_post WHERE id_user='$_SESSION[id_user]' AND id_jobpost='$row[id_jobpost]'";
-    $result1 = $conn->query($sql1);
+    $result1 = $conn->query(query: $sql1);
     if($result1->num_rows == 0) {  
     	
     	$sql = "INSERT INTO apply_job_post(id_jobpost, id_company, id_user) VALUES ('$_GET[id]', '$id_company', '$_SESSION[id_user]')";
@@ -40,12 +40,15 @@ if(isset($_GET)) {
 		$conn->close();
 
     }  else {
-		header("Location: jobs.php");
-		exit();
+		echo "<script>
+        alert('You have already applied to this job');
+        window.location.href='user/index.php';
+      </script>";
+		
 	}
 	
 
 } else {
-	header("Location: jobs.php");
+	header("Location: view-job-post.php");
 	exit();
 }

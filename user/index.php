@@ -185,7 +185,7 @@
                           <div class="card mb-4 border-light shadow-sm">
                               <div class="card-body">
                                   <h5 class="card-title">
-                                      <a href="view-job-post.php?id=<?php echo $row['id_jobpost']; ?>"
+                                      <a href="../view-job-post.php?id=<?php echo $row['id_jobpost']; ?>"
                                           id="jt"><?php echo $row['jobtitle']; ?></a>
                                   </h5>
                                   <p class="card-text">
