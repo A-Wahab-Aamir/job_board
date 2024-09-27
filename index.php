@@ -204,7 +204,7 @@ require_once("db.php");
                                         </div>
                                     </div>
                                     <div class="search-form">
-                                        <button type="submit" class="btn  btn-block head-btn2 m-1">Find Job</button>
+                                    <a href=""> <button type="submit" style="border: 0px; color:white;background-color:#FB246A">Find Job</button></a>
                                     </div>
                                 </form>
                                 <!-- form end -->
@@ -312,7 +312,7 @@ require_once("db.php");
                         <div class="cv-caption text-center">
                             <p class="pera1">YOU CAN BUILD YOUR CV HERE</p>
                             <p class="pera2"> Make a Difference with Your Resume!</p>
-                            <a href="#" class="border-btn2 border-btn4">Build your cv</a>
+                            <a href="c.v/c.v.php" class="border-btn2 border-btn4">Build your cv</a>
                         </div>
                     </div>
                 </div>
